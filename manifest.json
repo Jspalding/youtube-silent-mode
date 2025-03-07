@@ -4,12 +4,7 @@
 	"version": "1.0",
 	"description": "Hide Shorts, recommendations, comments, and more for a distraction-free YouTube experience.",
 	"permissions": ["scripting", "activeTab"],
-	"content_scripts": [
-		{
-			"matches": ["*://www.youtube.com/*"],
-			"js": ["content.js"]
-		}
-	],
+	"host_permissions": ["https://www.youtube.com/*"],
 	"action": {
 		"default_popup": "popup.html",
 		"default_icon": "icon.png"
