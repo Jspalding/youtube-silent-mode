@@ -25,29 +25,70 @@ document
 	});
 
 function toggleShorts() {
-	//TODO: Implement title search to make sure we are toggling Shorts
 	const HOME_CONTAINER = "ytd-rich-section-renderer";
-
 	const allVisibleContainers = document.querySelectorAll(HOME_CONTAINER);
 
-	console.log(allShortsAndPlayables);
-
 	allVisibleContainers.forEach((section) => {
-		section.style.display =
-			section.style.display === "none" ? "block" : "none";
+		const titleElements = section.querySelectorAll(
+			"span.title, h2, h3, yt-formatted-string"
+		);
+
+		let isShorts = false;
+		titleElements.forEach((element) => {
+			if (element.textContent.includes("Shorts")) {
+				isShorts = true;
+			}
+		});
+
+		if (isShorts) {
+			section.style.display =
+				section.style.display === "none" ? "block" : "none";
+		}
 	});
 }
 
 function togglePlayables() {
-	//TODO: Implement title search to make sure we are toggling Playables
 	const HOME_CONTAINER = "ytd-rich-section-renderer";
-
 	const allVisibleContainers = document.querySelectorAll(HOME_CONTAINER);
 
-	console.log(allShortsAndPlayables);
+	allVisibleContainers.forEach((section) => {
+		const titleElements = section.querySelectorAll(
+			"span.title, h2, h3, yt-formatted-string"
+		);
+
+		let isPlayables = false;
+		titleElements.forEach((element) => {
+			if (element.textContent.includes("Playables")) {
+				isPlayables = true;
+			}
+		});
+
+		if (isPlayables) {
+			section.style.display =
+				section.style.display === "none" ? "block" : "none";
+		}
+	});
+}
+
+function toggleNews() {
+	const HOME_CONTAINER = "ytd-rich-section-renderer";
+	const allVisibleContainers = document.querySelectorAll(HOME_CONTAINER);
 
 	allVisibleContainers.forEach((section) => {
-		section.style.display =
-			section.style.display === "none" ? "block" : "none";
+		const titleElements = section.querySelectorAll(
+			"span.title, h2, h3, yt-formatted-string"
+		);
+
+		let isNews = false;
+		titleElements.forEach((element) => {
+			if (element.textContent.includes("Top news")) {
+				isNews = true;
+			}
+		});
+
+		if (isNews) {
+			section.style.display =
+				section.style.display === "none" ? "block" : "none";
+		}
 	});
 }
