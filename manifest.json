@@ -3,7 +3,7 @@
 	"name": "YouTube - Silent Mode",
 	"version": "1.0",
 	"description": "Hide Shorts, recommendations, comments, and more for a distraction-free YouTube experience.",
-	"permissions": ["scripting", "activeTab"],
+	"permissions": ["scripting", "activeTab", "tabs", "scripting", "storage"],
 	"host_permissions": ["https://www.youtube.com/*"],
 	"action": {
 		"default_popup": "popup.html",
