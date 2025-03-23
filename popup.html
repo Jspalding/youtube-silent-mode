@@ -3,32 +3,42 @@
 	<head>
 		<title>YouTube - Silent Mode</title>
 		<link rel="stylesheet" href="styles.css" />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
-		<h2>YouTube Silent Mode</h2>
+		<div class="content">
+			<h2>YouTube Silent Mode</h2>
 
-		<div class="toggle-container">
-			<span class="toggle-label">Shorts</span>
-			<label class="switch">
-				<input type="checkbox" id="toggleShortsBtn" />
-				<span class="slider round"></span>
-			</label>
-		</div>
+			<h3>Currently blocking</h3>
+			<div class="toggle-container">
+				<span class="toggle-label">Shorts</span>
+				<label class="switch">
+					<input type="checkbox" id="toggleShortsBtn" />
+					<span class="slider round"></span>
+				</label>
+			</div>
 
-		<div class="toggle-container">
-			<span class="toggle-label">Playables</span>
-			<label class="switch">
-				<input type="checkbox" id="togglePlayablesBtn" />
-				<span class="slider round"></span>
-			</label>
-		</div>
+			<div class="toggle-container">
+				<span class="toggle-label">Playables</span>
+				<label class="switch">
+					<input type="checkbox" id="togglePlayablesBtn" />
+					<span class="slider round"></span>
+				</label>
+			</div>
 
-		<div class="toggle-container">
-			<span class="toggle-label">News</span>
-			<label class="switch">
-				<input type="checkbox" id="toggleNewsBtn" />
-				<span class="slider round"></span>
-			</label>
+			<div class="toggle-container">
+				<span class="toggle-label">News</span>
+				<label class="switch">
+					<input type="checkbox" id="toggleNewsBtn" />
+					<span class="slider round"></span>
+				</label>
+			</div>
 		</div>
 
 		<script src="popup.js"></script>
