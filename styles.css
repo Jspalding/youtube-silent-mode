@@ -39,11 +39,6 @@ h3 {
 	transition: all 0.3s ease;
 }
 
-.toggle-container:hover {
-	background-color: rgba(20, 39, 66, 0.8);
-	transform: translateY(-2px);
-}
-
 .toggle-label {
 	font-size: 15px;
 	font-weight: 400;
@@ -98,11 +93,104 @@ input:checked + .slider:before {
 	transform: translateX(24px);
 }
 
-/* Rounded sliders */
 .slider.round {
 	border-radius: 24px;
 }
 
 .slider.round:before {
 	border-radius: 50%;
+}
+
+.master-toggle-button::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 0;
+	height: 0;
+	background: rgba(255, 255, 255, 0.4);
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+	opacity: 0;
+}
+
+.master-toggle-button:active::after {
+	width: 300px;
+	height: 300px;
+	opacity: 1;
+	transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
+}
+
+@keyframes gradientChangeToActive {
+	0% {
+		background-color: #f44336;
+	}
+	100% {
+		background-color: #4caf50;
+	}
+}
+
+@keyframes gradientChangeToInactive {
+	0% {
+		background-color: #4caf50;
+	}
+	100% {
+		background-color: #f44336;
+	}
+}
+
+.master-toggle-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 15px 0;
+	position: relative;
+}
+
+.master-toggle-button {
+	width: 100%;
+	height: 60px;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	font-size: 20px;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	user-select: none;
+	background-color: #f44336; /* Default OFF state */
+	color: white;
+	transition: transform 0.3s ease, box-shadow 0.3s ease,
+		background-color 0.2s ease;
+}
+
+.master-toggle-button.active {
+	background-color: #4caf50;
+}
+
+.master-toggle-button.animate-to-active {
+	animation: gradientChangeToActive 0.4s linear forwards;
+}
+
+.master-toggle-button.animate-to-inactive {
+	animation: gradientChangeToInactive 0.4s linear forwards;
+}
+
+.master-toggle-button.custom {
+	background-color: #f39c12; /* Yellow for custom state */
+}
+
+#toggleStatus {
+	position: relative;
+	z-index: 2;
+}
+
+.master-toggle-button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }

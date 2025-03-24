@@ -15,29 +15,45 @@
 		<div class="content">
 			<h2>YouTube Silent Mode</h2>
 
-			<h3>Currently blocking</h3>
-			<div class="toggle-container">
-				<span class="toggle-label">Shorts</span>
-				<label class="switch">
-					<input type="checkbox" id="toggleShortsBtn" />
-					<span class="slider round"></span>
-				</label>
+			<div id="masterToggleContainer" class="master-toggle-container">
+				<div id="masterToggleButton" class="master-toggle-button">
+					<span id="toggleStatus">OFF</span>
+				</div>
+				<input
+					type="checkbox"
+					id="toggleAllBtn"
+					style="display: none"
+				/>
 			</div>
 
-			<div class="toggle-container">
-				<span class="toggle-label">Playables</span>
-				<label class="switch">
-					<input type="checkbox" id="togglePlayablesBtn" />
-					<span class="slider round"></span>
-				</label>
+			<div class="more-section-header">
+				<h3 id="moreControlsToggle">Content control</h3>
 			</div>
 
-			<div class="toggle-container">
-				<span class="toggle-label">News</span>
-				<label class="switch">
-					<input type="checkbox" id="toggleNewsBtn" />
-					<span class="slider round"></span>
-				</label>
+			<div class="more-section" id="moreControlsSection">
+				<div class="toggle-container">
+					<span class="toggle-label">Shorts</span>
+					<label class="switch">
+						<input type="checkbox" id="toggleShortsBtn" />
+						<span class="slider round"></span>
+					</label>
+				</div>
+
+				<div class="toggle-container">
+					<span class="toggle-label">Playables</span>
+					<label class="switch">
+						<input type="checkbox" id="togglePlayablesBtn" />
+						<span class="slider round"></span>
+					</label>
+				</div>
+
+				<div class="toggle-container">
+					<span class="toggle-label">News</span>
+					<label class="switch">
+						<input type="checkbox" id="toggleNewsBtn" />
+						<span class="slider round"></span>
+					</label>
+				</div>
 			</div>
 		</div>
 
