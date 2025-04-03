@@ -235,7 +235,7 @@ function toggleNews(isHidden) {
 		let isNews = false;
 		titleElements.forEach((element) => {
 			const text = element.textContent;
-			if (text.includes("Top news")) {
+			if (text.includes("Top news") || text.includes("Breaking news")) {
 				isNews = true;
 			}
 		});

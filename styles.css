@@ -11,13 +11,14 @@ body {
 	padding: 20px;
 }
 
-h2 {
+h1 {
 	text-align: center;
 	margin-top: 0;
 	color: #f0f0f0;
 	padding-bottom: 12px;
 	font-weight: 700;
 	letter-spacing: 0.5px;
+	font-size: 18px;
 }
 
 h3 {
@@ -163,7 +164,7 @@ input:checked + .slider:before {
 	overflow: hidden;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 	user-select: none;
-	background-color: #f44336; /* Default OFF state */
+	background-color: #f44336;
 	color: white;
 	transition: transform 0.3s ease, box-shadow 0.3s ease,
 		background-color 0.2s ease;
@@ -182,7 +183,7 @@ input:checked + .slider:before {
 }
 
 .master-toggle-button.custom {
-	background-color: #f39c12; /* Yellow for custom state */
+	background-color: #f39c12;
 }
 
 #toggleStatus {
