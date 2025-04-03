@@ -195,3 +195,9 @@ input:checked + .slider:before {
 	transform: translateY(-2px);
 	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
+
+.info {
+	margin-top: 2rem;
+	display: block;
+	font-weight: 600;
+}
