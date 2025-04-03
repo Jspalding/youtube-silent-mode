@@ -1,4 +1,16 @@
-// Reuse the toggle functions
+function toggleShortsNavButton(isHidden) {
+	const navItems = document.querySelectorAll("ytd-guide-entry-renderer");
+
+	navItems.forEach((item) => {
+		const titleElement = item.querySelector(
+			"#endpoint-title, yt-formatted-string, title style-scope ytd-guide-entry-renderer"
+		);
+		if (titleElement && titleElement.textContent.includes("Shorts")) {
+			item.style.display = isHidden ? "none" : "block";
+		}
+	});
+}
+
 function toggleShorts(isHidden) {
 	const HOME_CONTAINER = "ytd-rich-section-renderer";
 	const allVisibleContainers = document.querySelectorAll(HOME_CONTAINER);
@@ -19,6 +31,14 @@ function toggleShorts(isHidden) {
 			section.style.display = isHidden ? "none" : "block";
 		}
 	});
+
+	// shorts shelf (in video page)
+	const shortsShelf = document.querySelectorAll("ytd-reel-shelf-renderer");
+	shortsShelf.forEach((shelf) => {
+		shelf.style.display = isHidden ? "none" : "block";
+	});
+
+	toggleShortsNavButton(isHidden);
 }
 
 function togglePlayables(isHidden) {
@@ -76,7 +96,11 @@ function applySettings() {
 			newsHidden: false,
 		},
 		function (items) {
-			if (items.shortsHidden) toggleShorts(true);
+			if (items.shortsHidden) {
+				toggleShorts(true);
+			} else {
+				toggleShorts(false);
+			}
 			if (items.playablesHidden) togglePlayables(true);
 			if (items.newsHidden) toggleNews(true);
 		}
