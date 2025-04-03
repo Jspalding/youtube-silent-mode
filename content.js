@@ -88,12 +88,20 @@ function toggleNews(isHidden) {
 	});
 }
 
+function toggleComments(isHidden) {
+	const commentSections = document.querySelectorAll("ytd-comments");
+	commentSections.forEach((section) => {
+		section.style.display = isHidden ? "none" : "block";
+	});
+}
+
 function applySettings() {
 	chrome.storage.sync.get(
 		{
 			shortsHidden: false,
 			playablesHidden: false,
 			newsHidden: false,
+			commentsHidden: false,
 		},
 		function (items) {
 			if (items.shortsHidden) {
@@ -103,6 +111,7 @@ function applySettings() {
 			}
 			if (items.playablesHidden) togglePlayables(true);
 			if (items.newsHidden) toggleNews(true);
+			if (items.commentsHidden) toggleComments(true);
 		}
 	);
 }

@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			shortsHidden: false,
 			playablesHidden: false,
 			newsHidden: false,
+			commentsHidden: false,
 			allHidden: false,
 		},
 		function (items) {
@@ -12,14 +13,20 @@ document.addEventListener("DOMContentLoaded", function () {
 			document.getElementById("togglePlayablesBtn").checked =
 				items.playablesHidden;
 			document.getElementById("toggleNewsBtn").checked = items.newsHidden;
+			document.getElementById("toggleCommentsBtn").checked =
+				items.commentsHidden;
 			document.getElementById("toggleAllBtn").checked = items.allHidden;
 
 			const allOn =
-				items.shortsHidden && items.playablesHidden && items.newsHidden;
+				items.shortsHidden &&
+				items.playablesHidden &&
+				items.newsHidden &&
+				items.commentsHidden;
 			const allOff =
 				!items.shortsHidden &&
 				!items.playablesHidden &&
-				!items.newsHidden;
+				!items.newsHidden &&
+				!items.commentsHidden;
 
 			if (!allOn && !allOff) {
 				updateMasterToggleAppearance("custom");
@@ -56,11 +63,13 @@ document.addEventListener("DOMContentLoaded", function () {
 			document.getElementById("toggleShortsBtn").checked = newState;
 			document.getElementById("togglePlayablesBtn").checked = newState;
 			document.getElementById("toggleNewsBtn").checked = newState;
+			document.getElementById("toggleCommentsBtn").checked = newState;
 
 			chrome.storage.sync.set({
 				shortsHidden: newState,
 				playablesHidden: newState,
 				newsHidden: newState,
+				commentsHidden: newState,
 				allHidden: newState,
 			});
 
@@ -81,6 +90,11 @@ document.addEventListener("DOMContentLoaded", function () {
 						args: [newState],
 						function: toggleNews,
 					});
+					chrome.scripting.executeScript({
+						target: { tabId: tab.id },
+						args: [newState],
+						function: toggleComments,
+					});
 				});
 			});
 		});
@@ -94,11 +108,13 @@ document.getElementById("toggleAllBtn").addEventListener("change", function () {
 	document.getElementById("toggleShortsBtn").checked = isChecked;
 	document.getElementById("togglePlayablesBtn").checked = isChecked;
 	document.getElementById("toggleNewsBtn").checked = isChecked;
+	document.getElementById("toggleCommentsBtn").checked = isChecked;
 
 	chrome.storage.sync.set({
 		shortsHidden: isChecked,
 		playablesHidden: isChecked,
 		newsHidden: isChecked,
+		commentsHidden: isChecked,
 		allHidden: isChecked,
 	});
 
@@ -118,6 +134,11 @@ document.getElementById("toggleAllBtn").addEventListener("change", function () {
 				target: { tabId: tab.id },
 				args: [isChecked],
 				function: toggleNews,
+			});
+			chrome.scripting.executeScript({
+				target: { tabId: tab.id },
+				args: [isChecked],
+				function: toggleComments,
 			});
 		});
 	});
@@ -172,6 +193,24 @@ document
 					target: { tabId: tab.id },
 					args: [isChecked],
 					function: toggleNews,
+				});
+			});
+		});
+	});
+
+document
+	.getElementById("toggleCommentsBtn")
+	.addEventListener("change", function () {
+		const isChecked = this.checked;
+		chrome.storage.sync.set({ commentsHidden: isChecked });
+		updateMasterToggleState();
+
+		chrome.tabs.query({ url: "*://*.youtube.com/*" }, function (tabs) {
+			tabs.forEach(function (tab) {
+				chrome.scripting.executeScript({
+					target: { tabId: tab.id },
+					args: [isChecked],
+					function: toggleComments,
 				});
 			});
 		});
@@ -267,12 +306,20 @@ function toggleNews(isHidden) {
 	});
 }
 
+function toggleComments(isHidden) {
+	const commentSections = document.querySelectorAll("ytd-comments");
+	commentSections.forEach((section) => {
+		section.style.display = isHidden ? "none" : "block";
+	});
+}
+
 function applyCurrentSettings() {
 	chrome.storage.sync.get(
 		{
 			shortsHidden: false,
 			playablesHidden: false,
 			newsHidden: false,
+			commentsHidden: false,
 		},
 		function (items) {
 			chrome.tabs.query({ url: "*://*.youtube.com/*" }, function (tabs) {
@@ -292,6 +339,11 @@ function applyCurrentSettings() {
 						args: [items.newsHidden],
 						function: toggleNews,
 					});
+					chrome.scripting.executeScript({
+						target: { tabId: tab.id },
+						args: [items.commentsHidden],
+						function: toggleComments,
+					});
 				});
 			});
 		}
@@ -303,9 +355,13 @@ function updateMasterToggleState() {
 	const playablesChecked =
 		document.getElementById("togglePlayablesBtn").checked;
 	const newsChecked = document.getElementById("toggleNewsBtn").checked;
+	const commentsChecked =
+		document.getElementById("toggleCommentsBtn").checked;
 
-	const allOn = shortsChecked && playablesChecked && newsChecked;
-	const allOff = !shortsChecked && !playablesChecked && !newsChecked;
+	const allOn =
+		shortsChecked && playablesChecked && newsChecked && commentsChecked;
+	const allOff =
+		!shortsChecked && !playablesChecked && !newsChecked && !commentsChecked;
 
 	document.getElementById("toggleAllBtn").checked = allOn;
 
